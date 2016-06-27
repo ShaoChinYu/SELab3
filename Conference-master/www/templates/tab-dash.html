@@ -1,0 +1,133 @@
+<ion-view view-title="召开会议申请">
+  <ion-content class="padding">
+    <div class="content has-header padding" >
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="会议主题" ng-model="meeting.theme">
+        </label>
+        <!--<div class="item item-input item-select">-->
+          <!--<div class="input-label">-->
+            <!--会议室-->
+          <!--</div>-->
+          <!--<select>-->
+            <!--<option ng-repeat="room in rooms">{{room.id}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+
+        <!-- 选择与会人员复选框 点击进行初始化 -->
+        <label class="item item-input">
+
+            <!--<div ng-repeat="important_person in important_people"><input type="checkbox" />{{important_person.name}}</div>-->
+          <ion-checkbox ng-repeat="important_person in important_people"  class="item-people" ng-click="getChoose(important_person,0)">
+            {{ important_person.name }}
+          </ion-checkbox>
+          <div class="card item-card">
+            <div class="item item-text-wrap"  >
+              <label  ng-click="getImportantPeople(0)">选择必须与会人员</label>
+            </div>
+          </div>
+        </label>
+        <label class="item item-input">
+
+          <!--<div ng-repeat="important_person in important_people"><input type="checkbox" />{{important_person.name}}</div>-->
+          <ion-checkbox ng-repeat="normal_person in normal_people" class="item-people" ng-click="getChoose(normal_person,1)">
+            {{normal_person.name}}
+          </ion-checkbox>
+          <div class="card item-card">
+            <div class="item item-text-wrap">
+              <label  ng-click="getImportantPeople(1)">选择非必须与会人员</label>
+            </div>
+          </div>
+        </label>
+
+        <div class="item item-input">
+          <div class="input-label">
+            时间：
+          </div>
+
+          <div class="item-time">
+          <select class="item-choice" ng-model="start.month">
+            <option ng-repeat="month in time_month" >{{month}}</option>
+          </select>
+          <p>月</p>
+        </div>
+
+          <div class="item-time">
+            <select class="item-choice" ng-model="start.day">
+              <option ng-repeat="day in time_day">{{day}}</option>
+            </select>
+            <p>日</p>
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="start.hour">
+              <option ng-repeat="hour in time_hour">{{hour}}</option>
+            </select>
+            <p>时</p>
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="start.minute">
+              <option ng-repeat="minute in time_minute">{{minute}}</option>
+            </select>
+            <p>分</p>
+          </div>
+
+          <!-- -->
+          <div class="input-label">
+            到
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="end.month">
+              <option ng-repeat="month in time_month">{{month}}</option>
+            </select>
+            <p>月</p>
+          </div>
+
+          <div class="item-time">
+            <select class="item-choice" ng-model="end.day">
+              <option ng-repeat="day in time_day">{{day}}</option>
+            </select>
+            <p>日</p>
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="end.hour">
+              <option ng-repeat="hour in time_hour">{{hour}}</option>
+            </select>
+            <p>时</p>
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="end.minute">
+              <option ng-repeat="minute in time_minute">{{minute}}</option>
+            </select>
+            <p>分</p>
+          </div>
+          <div class="input-label">
+            时长：
+          </div>
+          <div class="item-time">
+            <select class="item-choice" ng-model="long.minute">
+              <option ng-repeat="minute in time_long">{{minute}}</option>
+            </select>
+            <p>分</p>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" ng-click="requestMeeting()">Submit</button>
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <p ng-repeat="x in meeting_info">
+            <button  ng-click="confirm(x)" class="button button-block button-positive">
+              {{'会议主题：'+x.name+'  开始时间：'+x.start.month +'月'+x.start.day+'日'+x.start.hour+'时'+x.start.minute+'分'}}
+              {{ '  结束时间：'+x.end.month +'月'+x.end.day+'日'+x.end.hour+'时'+x.end.minute+'分'}}
+              {{'  会议室名称：'+x.room.name+'  参加人员：'}}<span ng-repeat="y in x.persons">{{y.name+','}}</span>
+            </button>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>
